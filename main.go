@@ -2,6 +2,7 @@ package main
 
 import (
 	"github.com/gin-gonic/gin"
+	"github.com/rookie623/gin-crud/controllers"
 	"github.com/rookie623/gin-crud/initializers"
 )
 
@@ -11,15 +12,12 @@ func init() {
 }
 
 func main() {
-	router := gin.Default()
-	router.GET("/ping", func(context *gin.Context) {
-		context.JSON(200, gin.H{
-			"message": "pong",
-		})
-	})
+	r := gin.Default()
+	r.POST("/posts", controllers.PostCreate)
+	r.GET("/posts", controllers.PostIndex)
+	r.GET("/posts/:id", controllers.PostGet)
+	r.PUT("/posts/:id", controllers.PostUpdate)
+	r.DELETE("/posts/:id", controllers.PostDelete)
 
-	// listen and serve on 0.0.0.0:8080
-	if err := router.Run(); err != nil {
-		return
-	}
+	r.Run()
 }
