@@ -19,5 +19,8 @@ func main() {
 	r.PUT("/posts/:id", controllers.PostUpdate)
 	r.DELETE("/posts/:id", controllers.PostDelete)
 
-	r.Run()
+	err := r.Run()
+	if err != nil {
+		return
+	}
 }
